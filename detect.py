@@ -174,6 +174,110 @@ def run(
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
+
+                    
+                    x1 = int(xyxy[0].item())
+                    y1 = int(xyxy[1].item())
+                    x2 = int(xyxy[2].item())
+                    y2 = int(xyxy[3].item())
+                    confidence_score = conf
+                    class_index = cls
+                    object_name = names[int(cls)]
+
+                    # print('Kutu koordinatlar: ', x1, y1, x2, y2)
+                    # #print('class index is ', class_index)
+                    # print('Bir '+object_name+" tespit edildi")
+                    # original_img = im0
+                    # cropped_img = im0[y1:y2, x1:x2]
+                    # cv2.imwrite('test.png', cropped_img)
+                    # LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms")
+                    # print("-------------------------------------------")
+
+
+
+        ####################### Coordinate Detection #######################
+
+                    # Detection of cell phone for coordinate
+                    if object_name == names[67]:
+
+
+                        xmid = (x1+x2)/2
+                        ymid = (y1+y2)/2
+
+                    ######## 1. row ########
+                        if (ymid <= 120 and ymid >= 0):
+                            if (xmid <= 160 and xmid >= 0):
+                                print("K11'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            elif (xmid <= 320 and xmid >= 160):
+                                print("K12'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 480 and xmid >= 320):
+                                print("K13'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 640 and xmid >= 480):
+                                print("K14'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                    ######## 2. row ########
+                        if (ymid <= 240 and ymid >= 120):
+                            if (xmid <= 160 and xmid >= 0):
+                                print("K21'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            elif (xmid <= 320 and xmid >= 160):
+                                print("K22'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 480 and xmid >= 320):
+                                print("K23'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 640 and xmid >= 480):
+                                print("K24'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                    ######## 3. row ########
+                        if (ymid <= 360 and ymid >= 240):
+                            if (xmid <= 160 and xmid >= 0):
+                                print("K31'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            elif (xmid <= 320 and xmid >= 160):
+                                print("K32'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 480 and xmid >= 320):
+                                print("K33'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 640 and xmid >= 480):
+                                print("K34'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                    ######## 4. row ########
+                        if (ymid <= 480 and ymid >= 360):
+                            if (xmid <= 160 and xmid >= 0):
+                                print("K41'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            elif (xmid <= 320 and xmid >= 160):
+                                print("K42'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 480 and xmid >= 320):
+                                print("K43'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+                            if (xmid <= 640 and xmid >= 480):
+                                print("K44'de "+ object_name +  " tespit edildi.")
+                                print("Koordinatlari: ", xmid, ymid)
+                                print("-------------------------")
+
+
             # Stream results
             im0 = annotator.result()
             if view_img:
@@ -204,7 +308,7 @@ def run(
                     vid_writer[i].write(im0)
 
         # Print time (inference-only)
-        LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms")
+        #LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms")
 
     # Print results
     t = tuple(x.t / seen * 1E3 for x in dt)  # speeds per image

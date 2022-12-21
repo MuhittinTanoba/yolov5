@@ -98,8 +98,16 @@ class Annotator:
                 # self.draw.text((box[0], box[1]), label, fill=txt_color, font=self.font, anchor='ls')  # for PIL>8.0
                 self.draw.text((box[0], box[1] - h if outside else box[1]), label, fill=txt_color, font=self.font)
         else:  # cv2
-            p1, p2 = (int(box[0]), int(box[1])), (int(box[2]), int(box[3]))
+            # 0 sol, 1 üst, 2 sağ, 3 alt
+            p1 = (int(box[0]), int(box[1]))    # top-left 
+            p2 = (int(box[2]), int(box[3]))    # bottom-right
+            p3 = (int(box[2]), int(box[1]))    # top-right
+            p4 = (int(box[0]), int(box[3]))    # bottom-left
+            
             cv2.rectangle(self.im, p1, p2, color, thickness=self.lw, lineType=cv2.LINE_AA)
+            cv2.line(self.im, p1, p2, (0,255,0), thickness=self.lw, lineType=cv2.LINE_AA)
+            cv2.line(self.im, p3, p4, (0,255,0), thickness=self.lw, lineType=cv2.LINE_AA)
+            #cv2.circle(self.im, mid, 15, color, thickness=self.lw)
             if label:
                 tf = max(self.lw - 1, 1)  # font thickness
                 w, h = cv2.getTextSize(label, 0, fontScale=self.lw / 3, thickness=tf)[0]  # text width, height

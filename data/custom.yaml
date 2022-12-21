@@ -1,0 +1,8 @@
+train: ../atolye_data/train
+val: ../atolye_data/train
+
+# Number of Class
+nc: 2
+
+# Classes
+names: [ 'people', 'laptop' ]
